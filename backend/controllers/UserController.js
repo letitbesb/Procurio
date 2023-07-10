@@ -75,7 +75,7 @@ exports.forgotPassword = catchAsyncError( async (req,res,next)=>{
     const resetToken= await user.getPasswordResetToken();
 
     //some changes were done like giving value to passswordresettoken filed in shcema, so we save that
-    await user.save({validateBfeoreSave:false});
+    await user.save({validateBeforeSave:false});
 
     const resetPasswordUrl= `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested this url, then please ignore it.`;
