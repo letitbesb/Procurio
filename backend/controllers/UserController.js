@@ -248,7 +248,7 @@ exports.deleteUser = catchAsyncErrors( async (req, res,next) => {
         return next(new ErrorHandler(`No such user exists with Id: ${req.params.id}`,400));
     }
     
-    await user.remove();
+    await user.deleteOne();
 
     res.status(200).json({
         success: true,
