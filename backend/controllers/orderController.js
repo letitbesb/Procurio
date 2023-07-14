@@ -35,3 +35,35 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
             order,
         });
 });
+
+
+//get a single order details -->data of one  particular order WHO ordered 
+exports.getSingleOrder= catchAsyncError(async(req,res,next)=>{
+    const order = await orderModel.findById(req.params.id).populate(
+        "user",
+        "name email"
+        );  //what does populate do?
+        //--> what does populate does is that it uses the already found user id 
+        //in the product and goes to the "user" database 
+        //and then finds the name and email and returns it 
+
+    //if order not present
+    if(!order){
+        return next(new ErrorHandler("No order found with this ID",404));
+    }
+
+    res.status(200).json({
+        success: true,
+        order: order
+    });
+})
+
+// get orders of the logged in USER
+exports.myOrders= catchAsyncError(async(req,res,next)=>{
+    const order = await orderModel.find({user:req.user._id});
+      
+    res.status(200).json({
+        success: true,
+        order: order
+    });
+})
