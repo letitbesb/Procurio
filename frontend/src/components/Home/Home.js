@@ -1,11 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment,useEffect } from "react";
 import { CgMouse } from "react-icons/cg";
 import "./Home.css";
 import ProductCard from "./ProductCard.js";
 import Typed from 'typed.js';
-// import MetaData from "../layout/MetaData";
-// import { clearErrors, getProduct } from "../../actions/productAction";
-// import { useSelector, useDispatch } from "react-redux";
+import MetaData from "../layout/MetaData/MetaData";
+import { getProduct } from "../../actions/productAction";
+import { useDispatch ,useSelector} from "react-redux";
 // import Loader from "../layout/Loader/Loader.js";
 // import { useAlert } from "react-alert";
 
@@ -17,16 +17,14 @@ const product  = {
 };
 const Home = () => {
 //   const alert = useAlert();
-//   const dispatch = useDispatch();
-//   const { loading, error, products } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  const { loading, error, products,productCount} = useSelector(
+    (state) => state.products
+  );
 
-//   useEffect(() => {
-//     if (error) {
-//       alert.error(error);
-//       dispatch(clearErrors());
-//     }
-//     dispatch(getProduct());
-//   }, [dispatch, error, alert]);
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
   // Create reference to store the DOM element containing the animation
   const el = React.useRef(null);
 
@@ -47,7 +45,7 @@ const Home = () => {
         <Loader />
       ) : ( */}
         <Fragment>
-          {/* <MetaData title="ECOMMERCE" /> */}
+          <MetaData title="Procurio" />
 
           <div className="banner">
             <h1><span ref={el} /></h1>
@@ -64,17 +62,10 @@ const Home = () => {
           <h2 className="homeHeading">Featured Products</h2>
 
           <div className="container" id="container">
-            {/* {products && */}
-              {/* products.map((product) => ( */}
-                <ProductCard key={product._id} product={product} />
-                <ProductCard key={product._id} product={product} />
-                <ProductCard key={product._id} product={product} />
-                <ProductCard key={product._id} product={product} />
-                <ProductCard key={product._id} product={product} />
-                <ProductCard key={product._id} product={product} />
-                <ProductCard key={product._id} product={product} />
-                <ProductCard key={product._id} product={product} />
-              {/* ))} */}
+            {products &&
+              products.map((product) => (
+                 <ProductCard key={product._id} product={product} />
+              ))}
           </div>
         </Fragment>
       {/* )} */}

@@ -22,7 +22,7 @@ exports.getAllProducts= catchAsyncError(async (req,res)=>{
 
     // console.log(200);
     const prodCount= await productModel.countDocuments();
-    const resultsPerPage=3;
+    const resultsPerPage=8;
     const apifeats= new apifeat(productModel.find(),req.query)
     .search()
     .filter()
