@@ -6,25 +6,25 @@ import Typed from 'typed.js';
 import MetaData from "../layout/MetaData/MetaData";
 import { getProduct } from "../../actions/productAction";
 import { useDispatch ,useSelector} from "react-redux";
-// import Loader from "../layout/Loader/Loader.js";
-// import { useAlert } from "react-alert";
+import Loader from "../layout/Loader/Loader.js";
+import { useAlert } from "react-alert";
 
-const product  = {
-    name : "Blue Tshirt",
-    images:[{url:"https://i.ibb.co/DRST11n/1.webp"}],
-    price: "Rs.3000",
-    _id:"shreyash",
-};
+
 const Home = () => {
-//   const alert = useAlert();
+  const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, products,productCount} = useSelector(
     (state) => state.products
   );
 
   useEffect(() => {
+    if(error){
+      console.log("errorto hua bhai")
+      return alert.error(error);
+    }
     dispatch(getProduct());
-  }, [dispatch]);
+  }, [dispatch,error,alert]);
+  
   // Create reference to store the DOM element containing the animation
   const el = React.useRef(null);
 
@@ -41,9 +41,9 @@ const Home = () => {
   }, []);
   return (
     <Fragment>
-      {/* {loading ? (
+       {loading ? (
         <Loader />
-      ) : ( */}
+      ) : ( 
         <Fragment>
           <MetaData title="Procurio" />
 
@@ -68,7 +68,7 @@ const Home = () => {
               ))}
           </div>
         </Fragment>
-      {/* )} */}
+       )} 
     </Fragment>
   );
 };

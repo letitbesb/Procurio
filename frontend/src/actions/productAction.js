@@ -19,9 +19,10 @@ export const getProduct =()=> async (dispatch)=>{
         })
     }
     catch(error){
+        console.log(error.response.data)
         dispatch({  //this dispatch will tell ki error happened so now in the stire it would be updated
             type:ALL_PRODUCT_FAIL,  //this is action.type! which ecides what to do in the switch statement in productReducer
-            payload:error.response.data.message,
+            payload:error.response.data.error,
         });
     }
 };

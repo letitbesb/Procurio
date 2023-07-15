@@ -18,9 +18,10 @@ exports.createProduct= catchAsyncError(async(req,res,next)=>{
 });
 
 //get all the products
-exports.getAllProducts= catchAsyncError(async (req,res)=>{
+exports.getAllProducts= catchAsyncError(async (req,res,next)=>{
 
     // console.log(200);
+    // return next(new ErrorHandler("Testing alert template",500));
     const prodCount= await productModel.countDocuments();
     const resultsPerPage=8;
     const apifeats= new apifeat(productModel.find(),req.query)
