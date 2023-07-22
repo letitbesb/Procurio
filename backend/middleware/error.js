@@ -17,7 +17,7 @@ module.exports = (err, req, res, next) => {
     err=new ErrorHandler(message,400);
   }
 
-  //josnwebtoken error
+  //jsonwebtoken error
   if(err.name=== "JsonWebTokenError"){
     const message= `JSON web token invalid! Try again`;
 

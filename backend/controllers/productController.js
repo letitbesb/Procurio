@@ -38,13 +38,15 @@ exports.getAllProducts= catchAsyncError(async (req,res,next)=>{
 
 //get single product
 exports.getSingleProduct= catchAsyncError(async (req,res,next)=>{
-    const prod= await productModel.findById(req.params.id);
-    if(!prod){
+    
+    const product= await productModel.findById(req.params.id);
+    // console.log(product)
+    if(!product){
         return next(new ErrorHandler("Product not found",404));
     }
     res.status(200).json({
         success: true,
-        prod
+        product
     })
 });
 

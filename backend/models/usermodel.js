@@ -48,7 +48,7 @@ userSchema.pre("save",async function(next){
     if(!this.isModified("password")){  //if password isnt changed, then dont hash and move on
         next();
     }
-    this.password = await bcrypt.hash(this.password,10); //hash thr password
+    this.password = await bcrypt.hash(this.password,10); //hash the password
 });
 
 userSchema.methods.comparePassword = async function(passwordEntered) {

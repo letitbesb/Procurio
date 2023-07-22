@@ -4,7 +4,7 @@ import "./Home.css";
 import ProductCard from "./ProductCard.js";
 import Typed from 'typed.js';
 import MetaData from "../layout/MetaData/MetaData";
-import { getProduct } from "../../actions/productAction";
+import { clearErrors, getProduct } from "../../actions/productAction";
 import { useDispatch ,useSelector} from "react-redux";
 import Loader from "../layout/Loader/Loader.js";
 import { useAlert } from "react-alert";
@@ -14,13 +14,13 @@ const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, products,productCount} = useSelector(
-    (state) => state.products
+    (state) => state.products //here the case and spelling of .products is important it needs to be same as defined in store.js
   );
 
   useEffect(() => {
     if(error){
-      console.log("errorto hua bhai")
-      return alert.error(error);
+      alert.error(error);
+      dispatch(clearErrors());
     }
     dispatch(getProduct());
   }, [dispatch,error,alert]);
